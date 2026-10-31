@@ -42,3 +42,11 @@ and caveats go here too -- not just the wins.
 - Best VALIDATION macro-F1: 0.9891. Best model saved to outputs/models/wafer_vit_best.pt.
 - CAVEAT: validation score (used for model selection). Test-set evaluation pending
   for the unbiased number. Per-label breakdown + CI still to compute.
+
+## 2026-10-31 -- Detector evaluated on held-out test set (FINAL)
+- Test macro-F1: 0.9850 | micro-F1: 0.9837 | 95% CI [0.9762, 0.9894] (bootstrap 1000x).
+- Validation was 0.9891 -> small gap to test = good generalization, no overfitting.
+- Per-label F1 all 0.97-0.997; strong even on rare classes (Random: 0.978 on 23 maps).
+- Label-name order appears correct (rare classes Random/Near-Full match known
+  MixedWM38 distribution); high-confidence, not formally certified.
+- DETECTOR SUBSYSTEM COMPLETE. Model: outputs/models/wafer_vit_best.pt.
