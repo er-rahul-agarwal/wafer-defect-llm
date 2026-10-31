@@ -59,3 +59,14 @@ and caveats go here too -- not just the wins.
   Plan: scale to qwen3.8:27b later for a quality comparison.
 - Verified it responds (thinking disabled via --think=false for speed/consistency).
 - config.py: LLM_MODEL still None -> set to "qwen3.5:9b" next.
+
+## 2026-10-31 -- Tool-calling loop working END TO END (core complete)
+- Built the LLM layer: assistant/llm.py (Ollama client), assistant/tools.py
+  (detect_defects tool: schema + impl, Layer 3), assistant/orchestrator.py
+  (tool-calling loop, Layer 5), prompts/system_prompt.txt (versioned).
+- detect_defects takes no image arg; orchestrator holds the wafer out-of-band
+  and sets it on the tool layer. LLM only decides WHETHER to detect.
+- Verified end to end: asked about test sample 2, Qwen called the tool, got
+  {Center, Edge-Ring, Loc} + confidences, and explained them grounded in the
+  real detector output (quoted the actual confidence scores). No hallucination.
+- CORE SYSTEM COMPLETE: detector (0.985 F1) + Qwen + tool-calling connected.
