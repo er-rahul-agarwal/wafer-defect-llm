@@ -63,7 +63,7 @@ with gr.Blocks(title="Wafer Defect Assistant") as demo:
             gallery = gr.Gallery(value=GALLERY_ITEMS, columns=3,
                                  height="auto", allow_preview=False)
         with gr.Column(scale=2):
-            chatbot = gr.Chatbot(height=420, type="messages")
+            chatbot = gr.Chatbot(height=420)
             msg = gr.Textbox(placeholder="Ask about the selected wafer...",
                              label="Your question")
 
