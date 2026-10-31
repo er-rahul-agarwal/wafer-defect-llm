@@ -52,7 +52,7 @@ NORMALIZE_DIV = 2.0                 # [DESIGN] maps are 0/1/2; divide by 2 -> ra
 # ----------------------------------------------------------------------
 # ASSISTANT -- the LLM layer (subsystem 2)
 # ----------------------------------------------------------------------
-LLM_MODEL = None                    # TODO set in assistant/llm.py (confirm exact Ollama tag at pull time)
+LLM_MODEL = "qwen3.5:9b"            # [DESIGN] dev model; tool-calling capable. Scale to qwen3.8:27b for quality.
 LLM_TEMPERATURE = 0.0               # [DESIGN] low temp for consistent tool-calling
 OLLAMA_HOST = "http://localhost:11434"   # [DESIGN] default Ollama endpoint on the server
 
