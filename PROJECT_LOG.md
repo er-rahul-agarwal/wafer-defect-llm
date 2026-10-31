@@ -50,3 +50,12 @@ and caveats go here too -- not just the wins.
 - Label-name order appears correct (rare classes Random/Near-Full match known
   MixedWM38 distribution); high-confidence, not formally certified.
 - DETECTOR SUBSYSTEM COMPLETE. Model: outputs/models/wafer_vit_best.pt.
+
+## 2026-10-31 -- LLM runtime installed (Ollama + Qwen)
+- Ollama installed user-local (no sudo) to ~/.local, server running via nohup.
+  Models stored on ~/storage/ollama_models. Client v0.40.13.
+- Note: .tgz download URL now 404s; current packages are .tar.zst (zstd present on server).
+- Pulled qwen3.5:9b (6.6 GB, Q4_K_M, tool-calling capable) as the dev model.
+  Plan: scale to qwen3.8:27b later for a quality comparison.
+- Verified it responds (thinking disabled via --think=false for speed/consistency).
+- config.py: LLM_MODEL still None -> set to "qwen3.5:9b" next.
