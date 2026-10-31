@@ -35,3 +35,10 @@ and caveats go here too -- not just the wins.
   train 26,610 / val 5,702 / test 5,703 = 38,015 total.
 - Saved to data/processed/{train,val,test}.npz (gitignored, server-only).
 - Raw data never modified.
+
+## 2026-10-31 -- ViT detector trained (first full run)
+- Small ViT from scratch (1,214,984 params), 30 epochs, ~13s/epoch on RTX 6000 Ada (card 0).
+- Multi-label (8 base defects), BCEWithLogitsLoss, AdamW lr=3e-4, batch 128.
+- Best VALIDATION macro-F1: 0.9891. Best model saved to outputs/models/wafer_vit_best.pt.
+- CAVEAT: validation score (used for model selection). Test-set evaluation pending
+  for the unbiased number. Per-label breakdown + CI still to compute.
