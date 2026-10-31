@@ -1,3 +1,13 @@
 # Dependencies, pinned to exact versions as they are installed.
 # GPU-specific installs (e.g. the CUDA torch build) are recorded with the
 # exact command as a comment next to the package.
+
+# PyTorch (GPU build for CUDA 13) -- installed with:
+#   pip install torch torchvision --index-url https://download.pytorch.org/whl/cu130
+torch==2.14.1
+torchvision
+numpy
+matplotlib
+scikit-learn
+tqdm
+gdown
