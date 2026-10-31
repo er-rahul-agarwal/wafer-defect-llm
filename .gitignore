@@ -1,0 +1,29 @@
+﻿# ---- Data and model artifacts (live on the server, never in Git) ----
+data/
+outputs/
+runs/
+*.pt
+*.pth
+*.onnx
+*.npy
+*.npz
+*.ckpt
+
+# ---- Python ----
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+*.egg-info/
+.ipynb_checkpoints/
+
+# ---- Environment / secrets ----
+.env
+*.key
+
+# ---- OS / editor noise ----
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

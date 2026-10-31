@@ -1,0 +1,3 @@
+# Dependencies, pinned to exact versions as they are installed.
+# GPU-specific installs (e.g. the CUDA torch build) are recorded with the
+# exact command as a comment next to the package.
