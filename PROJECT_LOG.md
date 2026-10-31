@@ -28,3 +28,10 @@ and caveats go here too -- not just the wins.
     identically to train and inference. Negligible impact; logged for traceability.
 - config.py updated with measured values (IMAGE_SIZE, NUM_LABELS, pixel codes,
   clip rule).
+
+## 2026-10-31 -- Data prep: cleaned and split
+- detector/data_prep.py: clipped 214 value-3 pixels -> 2 (as logged).
+- Stratified 70/15/15 split (multi-label aware, via packed-bit key, SEED=42):
+  train 26,610 / val 5,702 / test 5,703 = 38,015 total.
+- Saved to data/processed/{train,val,test}.npz (gitignored, server-only).
+- Raw data never modified.
