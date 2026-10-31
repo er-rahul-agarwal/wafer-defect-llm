@@ -33,9 +33,9 @@ import config
 from detector.model import WaferViT
 
 # Your requested progress-bar format: [%%%%....] 62% | 830/1331 | ETA 00:05
+# Progress bar: fills left-to-right with % ; one line, reused each epoch.
 BAR_FORMAT = "{desc}: [{bar}] {percentage:3.0f}% | {n_fmt}/{total_fmt} | ETA {remaining}"
-# Use % for filled and . for empty, matching the requested bar style.
-TQDM_ASCII = "%."
+TQDM_ASCII = " %"   # space = empty, % = filled (left-to-right)
 
 
 def load_split(name):
@@ -119,7 +119,7 @@ def main():
         running = 0.0
         t0 = time.time()
         bar = tqdm(train_loader, bar_format=BAR_FORMAT, ascii=TQDM_ASCII,
-                   desc=f"Epoch {epoch}/{epochs}")
+                   desc=f"Epoch {epoch}/{epochs}", leave=False)
         for x, y in bar:
             x, y = x.to(device), y.to(device)
             optimizer.zero_grad()
