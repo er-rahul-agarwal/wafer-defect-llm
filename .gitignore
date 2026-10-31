@@ -6,6 +6,7 @@ runs/
 *.pth
 *.onnx
 *.npy
+!app/examples/*.npy
 *.npz
 *.ckpt
 
