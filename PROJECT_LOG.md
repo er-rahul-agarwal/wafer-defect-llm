@@ -70,3 +70,10 @@ and caveats go here too -- not just the wins.
   {Center, Edge-Ring, Loc} + confidences, and explained them grounded in the
   real detector output (quoted the actual confidence scores). No hallucination.
 - CORE SYSTEM COMPLETE: detector (0.985 F1) + Qwen + tool-calling connected.
+
+## 2026-10-31 -- Multi-turn conversation verified
+- 3-turn conversation on one wafer: analyze -> "why together?" -> "most serious?"
+- Memory confirmed: turns 2-3 referenced the exact defects from turn 1
+  (Center/Edge-Ring/Loc) without re-calling the tool. History intact, stateful.
+- NOTE: detector findings are grounded/verified; the LLM's process-cause
+  reasoning is its own general knowledge (ungrounded) -> motivates RAG.
