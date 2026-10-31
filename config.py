@@ -41,10 +41,13 @@ PIXEL_FAIL = 2                      # [DATA] die failed electrical test
 # GAN edge artifact, not a documented code. Preprocessing clips 3 -> 2
 # (nearest valid code). Applied identically to train and inference data.
 PIXEL_CLIP_MAX = 2                  # [DESIGN] clip any value above this down to it
-BASE_MODEL = None                   # TODO choose pretrained ViT tag in detector/model.py
-BATCH_SIZE = None                   # [GUESS] set in detector/train once VRAM is checked
-LEARNING_RATE = None                # [GUESS] set in detector/train
-NUM_EPOCHS = None                   # [GUESS] set in detector/train
+# Detector architecture values live in detector/model.py (patch size, depth, etc.);
+# the training hyperparameters below are the tunable starting points.
+BATCH_SIZE = 128                    # [GUESS] fits the 48 GB card easily; confirm via smoke test
+LEARNING_RATE = 3e-4               # [GUESS] common starting LR for a ViT trained from scratch
+NUM_EPOCHS = 20                     # [GUESS] placeholder; set properly after smoke-test timing
+GPU_ID = 0                          # [DESIGN] pin to card 0 (shared server etiquette)
+NORMALIZE_DIV = 2.0                 # [DESIGN] maps are 0/1/2; divide by 2 -> range [0,1]
 
 # ----------------------------------------------------------------------
 # ASSISTANT -- the LLM layer (subsystem 2)
