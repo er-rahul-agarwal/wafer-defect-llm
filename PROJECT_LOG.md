@@ -13,3 +13,18 @@ and caveats go here too -- not just the wins.
 - Decisions settled: ViT-Tiny on MixedWM38 (multi-label) as detector;
   Qwen via Ollama (8B dev, 30B for quality) as LLM; tool-calling as core;
   RAG and evaluation promoted to core (per job-description findings).
+
+## 2026-10-31 -- Dataset acquired and inspected (MixedWM38)
+- Downloaded Wafer_Map_Datasets.npz (394 MB) from the authors' Google Drive
+  (Junliangwangdhu/WaferMap, corrected C7/C9 labels) into data/raw/.
+- Inspected with detector/inspect_data.py (read-only). Measured facts:
+  - 38,015 wafer maps, each 52 x 52 (arr_0, int32).
+  - Labels arr_1: 8-dim multi-hot, values {0,1}. Confirms multi-label framing.
+  - Pixel codes: 0 blank (23.7%), 1 pass (51.9%), 2 fail (24.4%).
+  - FINDING: value 3 in 214 pixels across 105 maps (0.0002%). Visual check
+    (outputs/figures/pixel_value_3_samples.png) shows isolated single pixels
+    at the wafer edge -> stray GAN artifact, no signal.
+  - DECISION: clip 3 -> 2 in preprocessing (nearest valid code), applied
+    identically to train and inference. Negligible impact; logged for traceability.
+- config.py updated with measured values (IMAGE_SIZE, NUM_LABELS, pixel codes,
+  clip rule).

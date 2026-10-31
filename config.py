@@ -28,8 +28,19 @@ PROMPT_DIR = os.path.join(ROOT_DIR, "prompts")
 # DETECTOR -- the vision model (subsystem 1)
 # ----------------------------------------------------------------------
 DATASET_NAME = "MixedWM38"          # [DESIGN] 38-class, mixed defects
-NUM_CLASSES = None                  # TODO set in detector/data_prep after inspecting labels
-IMAGE_SIZE = None                   # TODO set after inspecting wafer-map dimensions
+# --- Values below measured by detector/inspect_data.py on 2026-10-31 ---
+NUM_LABELS = 8                      # [DATA] arr_1 is 8-dim multi-hot (8 base defect types)
+IMAGE_SIZE = 52                     # [DATA] arr_0 maps are 52 x 52
+NUM_SAMPLES = 38015                 # [DATA] total wafer maps in the archive
+
+# Pixel codes in the raw maps (arr_0):
+PIXEL_BLANK = 0                     # [DATA] background / outside wafer
+PIXEL_PASS = 1                      # [DATA] die passed electrical test
+PIXEL_FAIL = 2                      # [DATA] die failed electrical test
+# Value 3 appears in 214 pixels across 105 maps (0.0002% of pixels): a stray
+# GAN edge artifact, not a documented code. Preprocessing clips 3 -> 2
+# (nearest valid code). Applied identically to train and inference data.
+PIXEL_CLIP_MAX = 2                  # [DESIGN] clip any value above this down to it
 BASE_MODEL = None                   # TODO choose pretrained ViT tag in detector/model.py
 BATCH_SIZE = None                   # [GUESS] set in detector/train once VRAM is checked
 LEARNING_RATE = None                # [GUESS] set in detector/train
