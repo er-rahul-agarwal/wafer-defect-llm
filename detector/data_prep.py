@@ -13,9 +13,15 @@ Run from the project root:
 """
 
 import os
+import sys
 import numpy as np
 from sklearn.model_selection import train_test_split
 
+# config.py lives in the project root (one level up from detector/).
+# Add that root to Python's import path so "import config" resolves no
+# matter which folder the script is launched from.
+ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, ROOT_DIR)
 import config  # single source of truth for paths and constants
 
 RAW_PATH = os.path.join(config.RAW_DIR, "Wafer_Map_Datasets.npz")
