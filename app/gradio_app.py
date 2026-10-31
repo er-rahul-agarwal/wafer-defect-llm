@@ -42,18 +42,22 @@ def select_wafer(evt: gr.SelectData):
     assistant = WaferAssistant(wafer)
     greeting = (f"Selected Example {ex['id']}. "
                 f"Ask me what defects it has, or anything about it.")
-    # Return: the new assistant (kept in state), a cleared chat with a greeting.
-    return assistant, [(None, greeting)]
+    # Return: the new assistant (kept in state), a fresh chat with a greeting.
+    return assistant, [{"role": "assistant", "content": greeting}]
 
 
 def respond(message, chat_history, assistant):
     """Send the user's message through the orchestrator; append the reply."""
     if assistant is None:
         chat_history = chat_history + [
-            (message, "Please select a wafer from the gallery first.")]
+            {"role": "user", "content": message},
+            {"role": "assistant",
+             "content": "Please select a wafer from the gallery first."}]
         return "", chat_history
     answer = assistant.ask(message)
-    chat_history = chat_history + [(message, answer)]
+    chat_history = chat_history + [
+        {"role": "user", "content": message},
+        {"role": "assistant", "content": answer}]
     return "", chat_history
 
 
@@ -73,7 +77,7 @@ with gr.Blocks(title="Wafer Defect Assistant") as demo:
             gallery = gr.Gallery(value=GALLERY_ITEMS, columns=3,
                                  height="auto", allow_preview=False)
         with gr.Column(scale=2):
-            chatbot = gr.Chatbot(height=420)
+            chatbot = gr.Chatbot(height=420, type="messages")
             msg = gr.Textbox(placeholder="Ask about the selected wafer...",
                              label="Your question")
 
