@@ -45,7 +45,7 @@ PIXEL_CLIP_MAX = 2                  # [DESIGN] clip any value above this down to
 # the training hyperparameters below are the tunable starting points.
 BATCH_SIZE = 128                    # [GUESS] fits the 48 GB card easily; confirm via smoke test
 LEARNING_RATE = 3e-4               # [GUESS] common starting LR for a ViT trained from scratch
-NUM_EPOCHS = 20                     # [GUESS] placeholder; set properly after smoke-test timing
+NUM_EPOCHS = 30                     # [GUESS] ~13s/epoch measured; 30 epochs ~6-7 min total
 GPU_ID = 0                          # [DESIGN] pin to card 0 (shared server etiquette)
 NORMALIZE_DIV = 2.0                 # [DESIGN] maps are 0/1/2; divide by 2 -> range [0,1]
 
