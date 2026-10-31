@@ -81,7 +81,16 @@ if __name__ == "__main__":
     test = np.load(os.path.join(config.PROCESSED_DIR, "test.npz"))
     assistant = WaferAssistant(test["maps"][2])   # the Center/Edge-Ring/Loc wafer
 
-    question = "What defects does this wafer have, and what might they indicate?"
-    print("USER:", question, "\n")
-    answer = assistant.ask(question)
-    print("ASSISTANT:", answer)
+    # A short conversation: first analyze, then a follow-up that relies on
+    # the assistant REMEMBERING the previous answer (no re-analysis needed).
+    turns = [
+        "What defects does this wafer have?",
+        "Why might those defects appear together on the same wafer?",
+        "Which of them is the most serious, and why?",
+    ]
+
+    for q in turns:
+        print("=" * 70)
+        print("USER:", q, "\n")
+        answer = assistant.ask(q)
+        print("ASSISTANT:", answer, "\n")
